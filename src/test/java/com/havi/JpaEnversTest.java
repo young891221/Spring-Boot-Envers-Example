@@ -3,6 +3,7 @@ package com.havi;
 import com.havi.domain.Book;
 import com.havi.repository.BookRepository;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,14 @@ public class JpaEnversTest {
     public void Book_Revision_검색() {
         Revision revision = bookRepository.findLastChangeRevision(Long.valueOf(1));
 
+        Book book = (Book) revision.getEntity();
+        Integer revisionNumber = (Integer) revision.getRevisionNumber();
+        DateTime dateTime = revision.getRevisionDate();
+
+        System.out.println(revision);
+        System.out.println(book);
+        System.out.println(revisionNumber);
+        System.out.println(dateTime);
     }
+
 }
