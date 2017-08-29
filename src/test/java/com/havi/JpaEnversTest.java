@@ -8,12 +8,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.history.Revision;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
+
+import static org.springframework.data.domain.Sort.Direction.*;
 
 /**
  * Created by KimYJ on 2017-08-29.
@@ -46,4 +53,9 @@ public class JpaEnversTest {
         System.out.println(dateTime);
     }
 
+    @Test
+    public void Book_Revision_Page_검색() {
+        Page<Revision<Integer, Book>> bookPage = bookRepository.findRevisions(Long.valueOf(1), new PageRequest(0, 10));
+        System.out.println(bookPage);
+    }
 }
