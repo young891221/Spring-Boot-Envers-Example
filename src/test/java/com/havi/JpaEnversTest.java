@@ -42,10 +42,10 @@ public class JpaEnversTest {
                     bookRepository.save(Book.builder().title("테스트" + index).publishedAt(Timestamp.valueOf(LocalDateTime.now())).build())
             );
 
-            //1번 삭제
+            //1번 Book 삭제
             bookRepository.delete(Long.valueOf(1));
 
-            //2번 수정하기 3번 진행
+            //2번 Book 수정하기 3번 반복
             Book book2 = bookRepository.findOne(Long.valueOf(2));
             IntStream.rangeClosed(1, 3).forEach(index -> {
                 book2.setTitle("수정" + index);
